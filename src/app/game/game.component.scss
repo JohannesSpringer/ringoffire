@@ -25,10 +25,15 @@
     }
 }
 
-.take-card {
-    animation: pick-card-animation 1.25s ease-in-out;
+.played-card {
+    right: 12px;
+    top: 12px;
     transform: scale(1.4) translateX(150px) translateY(-150px) rotate(30deg);
+}
 
+.take-card {
+    animation: pick-card-animation 1s ease-in-out;
+    transform: scale(1.4) translateX(150px) translateY(-150px) rotate(30deg);
 }
 
 @keyframes pick-card-animation {
