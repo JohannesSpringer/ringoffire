@@ -8,10 +8,11 @@ import { Game } from 'src/models/game';
 })
 export class GameComponent implements OnInit {
   pickCardAnimation = false;
+  currentCard: string = '';
   game: Game;
 
-  constructor() {}
-  
+  constructor() { }
+
   ngOnInit(): void {
     this.newGame();
   }
@@ -22,6 +23,14 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    this.pickCardAnimation = true;
+    if (!this.pickCardAnimation) {
+      this.currentCard = this.game.stack.pop();
+      this.game.playedCards.push(this.currentCard);
+      this.pickCardAnimation = true;
+
+      setTimeout(() => {
+        this.pickCardAnimation = false;
+      }, 1500);
+    }
   }
 }
