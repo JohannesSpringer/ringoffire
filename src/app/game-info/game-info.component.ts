@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-game-info',
   templateUrl: './game-info.component.html',
   styleUrls: ['./game-info.component.scss']
 })
-export class GameInfoComponent implements OnInit {
-  cardAction = [ 
+export class GameInfoComponent implements OnInit, OnChanges {
+  cardAction = [
     { title: 'Waterfall', description: 'Everyone has to start drinking at the same time. As soon as player 1 stops drinking, player...' },
     { title: 'You', description: 'You decide who drinks!' },
     { title: 'Me', description: 'Congrats! Drink a shot!' },
@@ -26,8 +26,16 @@ export class GameInfoComponent implements OnInit {
   description: string = '';
   @Input() card: string;
 
-  ngOnInit() {
-    console.log('current card: ', this.card)
+  ngOnInit(): void {
   }
-  
+
+  ngOnChanges(): void {
+    if (this.card) {
+      console.log('current card: ', this.card)
+      let cardNumber = +this.card.split('_')[1];
+      this.title = this.cardAction[cardNumber - 1].title;
+      this.description = this.cardAction[cardNumber - 1].description;
+    }
+  }
+
 }
